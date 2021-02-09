@@ -25,7 +25,7 @@ loading the html-file into a (onlne) HTML-Editor, f.ex. using my online HTML-Edi
 But ATTENTION Please: Internet-published images commonly are subjected to their Owners Copyright! So use
 them either for privat purposes only or create your own ones to spread – as I do here using f.ex. my two
 "symbols" for R's and C's, provided in the html-file (inside the script) as example - this two are free to use
-for anybody!
+for anybody...
 
 Using the html-file example (file: "BOM-List with clickable Pictures.htm") it's possible to insert a picture
 (manually) into the &lt;div&gt;-box of each row, resulting in a small visible symbol, placed at begin of each row.
