@@ -9,7 +9,7 @@ over the internet, inserting only as a Link pointing to image's URL-Place).
 
 For this I used the mentioned ability (known from E-Mails in eml-file-format (MIME) to insert pictures
 in HTML Base64-format **inside** the given html-file. This format uses 64 characters of the ASCII-table,
-so beeing "typeable and printable" (also on screen), so beeing able to put directly into any html-file.
+so beeing "typeable and printable" (also on screen), so beeing able to insert them directly into any html-file.
 
 To create a HTML-(BOM-)file for that purpose, I modified a Eagle .ulp-script to generate a html-file
 *with a table-cell at the begin of each row*, here named
