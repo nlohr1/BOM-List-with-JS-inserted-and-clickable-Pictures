@@ -1,5 +1,5 @@
 # BOM-List with clickable Pictures
-HTML-File with "Bill of Materials" for any Project, herewith including clickable pictures.
+HTML-File with "Bill of Materials" for any Project, including clickable pictures.
 
 To create a BOM-List, each CAD-Program has its own Output-format, mostly (text-)CSS-format, although
 programs also may output item-lists per HTML-File. Advantages of this format: Readable in each Browser
