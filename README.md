@@ -60,8 +60,8 @@ or via css... In this "simpler" example normally no other insertion is necessary
 
 The File "Resize-only-One-Image.js"
 -----------------------------------
-...does what the name says: Insert this js-script within one blank-space between both
-&lt;img src=\"...\" alt=\"\" &gt; image-file tags.
+...does what the name says: Insert this js-script within one blank-space between the
+&lt;img src=\"...\" alt=\"\" width=\"20\"&gt; image-file tags.
 
 The Principle:
 --------------
