@@ -17,7 +17,7 @@ a html-file *with a table-cell at the begin of each row*, here named
 "Eagle-BOM-List-Export to txt- css- or html-file.ulp"
 
 Other BOM-(item-)files generated from other programs may also be used, beeing in html-format and
-surrounding the inserted picture-data with a blank <div>-box. 
+surrounding the inserted picture-data with a blank &lt;div&gt;-box. 
 
 To transform a picture into a base64-format it's possible to insert it via simply "drag and drop",
 loading the html-file into a HTML-Editor, f.ex. using my online HTML-Editor @ www.nlohrmann.de
