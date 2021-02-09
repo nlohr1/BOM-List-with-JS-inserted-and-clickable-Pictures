@@ -47,8 +47,8 @@ Yet not implemented in this last feature is a total automated process: The two (
 Also each image has to be surounded with a blank &lt;div&gt;...&lt;/div&gt;
 Hint: For more detailed description see //outcommented lines inside the provided html and js-file examples.
 
-For simple "Click over to enlarge" each image:
-----------------------------------------------
+For simple "Click over to enlarge" each image in a html-file:
+-------------------------------------------------------------
 If you don't have repeated images or items in a html-file it's also possible to use the provided
 "Image-Resize.js" script, adding it into the header or other place inside the html-file.
 This script simply makes all images of a html-file clickable to it's original size and resizing
