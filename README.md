@@ -1,4 +1,4 @@
-# BOM-List-with-JS-inserted-and-clickable-Pictures
+# BOM-List with clickable Pictures
 Electronic Schematics list with "Bill of Materials", with (manually) inserted pictures, made clickable.
 
 To create a BOM-List, each CAD-Program has its own Output-format, mostly (text-)CSS-format, although
