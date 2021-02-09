@@ -26,7 +26,7 @@ ATTENTION please: Internet-published images commonly are subjected to Owners Cop
 them for privat purposes or create your own ones to spread – as I do, using f.ex. the two symbols
 for R's and C's provided here in the html-file (inside the script) as example - they are free to use.
 
-Using th html-file example it's possible to insert a picture into the <div>-box in each row,
+Using th html-file example it's possible to insert a picture into the &lt;div&gt;-box in each row,
 resulting in a small visible symbol (placed at begin of each row).
 
 To hold the item-list in a overviewable format, each line has a proposed height of 20px, so also
