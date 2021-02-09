@@ -44,8 +44,8 @@ but used *repeated times* in the html-body, so saving a lot of total (BOM-)file 
 Yet not implemented in this last feature is a total automated process to insert pictures: The two provided
 "symbols" (for repeated use of R's and C's) are inserted in the js-header and serves as usable examples, but 
 if additional repeated-items are needed to use, they have to be inserted manually (f.ex. via a text-editor),
-replacing all " in the *&lt;image-data&gt;* with \\" – as f.ex. commonly used *alt=""* has to be coded
-as *alt=\\"\\"*
+replacing all " in the *&lt;image-data&gt;* with \\" – as f.ex. *alt=""* image-tags have to be coded here
+as *alt=\\"\\"* (for js to read this special " character as part-of-image-code and not as part-of-a-command).
 
 Also each image in the *html-body* has to be surrounded with a simple &lt;div&gt;...&lt;/div&gt;-box.
 Hint: For more detailed description see //commented lines inside the html- and js-file examples.
