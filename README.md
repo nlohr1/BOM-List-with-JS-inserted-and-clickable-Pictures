@@ -62,8 +62,10 @@ The File "Resize-only-One-Image.js"
 -----------------------------------
 ...does what the name says: Inserting this js-script within one blank-space between the
 
-&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; image-file tags makes this image blue-bordered and resizeable
-("50" here is the pictures width in px).
+&lt;img src=\"...\" alt=\"\" width=\"50\"&gt;
+
+image-file tags makes this image blue-bordered and resizeable by mouse-click.\n
+(Number "50" here is the pictures width in px).
 
 The Principle:
 --------------
