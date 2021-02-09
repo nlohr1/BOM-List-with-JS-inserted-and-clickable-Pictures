@@ -12,10 +12,8 @@ beeing "typeable and printable" (also on a screen), so beeing able to insert the
 as a valid code for binary-files, as images originally are.
 
 To create a HTML-(BOM-)file for that purpose, I modified an Eagle .ulp-script to generate a html-file
-inserting *a table-cell at begin of each row*, here named:
-
-"Eagle-BOM-List-Export to txt- css- or html-file.ulp"
-
+inserting *a table-cell at begin of each row*, here named:  
+"Eagle-BOM-List-Export to txt- css- or html-file.ulp"  
 BOM-(item-)files generated from other programs may also be used, beeing in html-format and
 surrounding the inserted picture-data with a blank &lt;div&gt; box to insert repeated images pre CSS classes.
 
@@ -60,12 +58,9 @@ or via css... In this "simpler" example normally no other insertion is necessary
 
 The File "Resize-only-One-Image.js"
 -----------------------------------
-...does what the name says: Inserting this js-script within one blank-space between the
-
-&lt;img src=\"...\" alt=\"\" width=\"50\"&gt;
-
-image-file tags makes this image blue-bordered and resizeable by mouse-click.\n
-(Number "50" here is the pictures width in px).
+...does what the name says: Inserting this js-script within one blank-space between the image-file tags  
+&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; (Number "50" here is the pics width in px)  
+makes this image blue-bordered and resizeable by mouse-click.
 
 The Principle:
 --------------
