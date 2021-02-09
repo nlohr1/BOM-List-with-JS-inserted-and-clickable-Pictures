@@ -43,7 +43,7 @@ html-file's js-header, but used repeated times in the html-body, so saving a lot
 Yet not implemented in this last feature is a total automated process: The two (free) provided symbols
 (for repeated use of R's and C's) inserted in the header serve as usable examples, but any additional
 (repeated) items have to be inserted manually (f.ex. via text-editor), replacing all " in the 
-&lt;image-data&gt; with \" – as f.ex. alt="" has to be coded as alt\"\"
+&lt;image-data&gt; with \\" – as f.ex. commonly used alt="" has to be coded as alt\\"\\"
 Also each image has to be surounded with a blank &lt;div&gt;...&lt;/div&gt;
 Hint: For more detailed description see //outcommented lines inside the provided html and js-file examples.
 
