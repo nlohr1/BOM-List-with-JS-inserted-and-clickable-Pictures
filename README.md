@@ -59,8 +59,8 @@ or via css... In this "simpler" example normally no other insertion is necessary
 The File "Resize-only-One-Image.js"
 -----------------------------------
 ...does what the name says: Inserting this js-script within one blank-space between the image-file tags  
-&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; (Number "50" here is the pics width in px)  
-makes this image blue-bordered and resizeable by mouse-click.
+&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; (number "50" here is the pics width in px)  
+makes *this* image blue-bordered and resizeable by mouse-click.
 
 The Principle:
 --------------
