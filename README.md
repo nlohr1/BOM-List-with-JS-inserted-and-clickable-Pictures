@@ -4,19 +4,20 @@ HTML-File with "Bill of Materials" for any Project, including clickable pictures
 To create a BOM-List, each CAD-Program has its own Output-format, mostly (text-)CSS-format, although
 programs also may output item-lists per HTML-File. Advantages of this format: Readable in each Browser
 and able to use images in base64-data-format, this inserted in ONE-html-file only (not as usually spreaded
-over the internet, inserting only as a Link pointing to image's URL-Place).
+over the internet, inserting them only as links pointing to each image's URL-Place).
 
 For this I used the mentioned ability to insert pictures in HTML-files known from E-Mails in eml-file-format
 (MIME), a Base64 format **inside** the given html-file. This format uses 64 characters of the ASCII-table
 beeing "typeable and printable" (also on a screen), so beeing able to insert them directly into any html-file
-as a valid code for binary-files, as images originally are.
+as a valid *coding for binary-files*, as images originally are.
 
 To create a HTML-(BOM-)file for that purpose, I modified an Eagle .ulp-script to generate a html-file
-inserting *a table-cell at begin of each row*, here named:  
+inserting *a table-cell at begin of each row*, here named  
 "Eagle-BOM-List-Export to txt- css- or html-file.ulp"  
+
 BOM-(item-)files generated from other programs may also be used, beeing in html-format and
-surrounding the inserted picture-data with a blank &lt;div&gt; box with a CSS-class to insert repeated images
-or inserted as a single-image directly into the html-body (as link or as base64-data-code).
+surrounding the inserted picture-data with a blank &lt;div&gt; box with a chosen CSS-class, to insert repeated images
+or without &lt;div&gt; box, but inserted directly as single-image (as link or as base64-data-code) into the html-body.
 
 To transform a picture into a base64-format it's possible to insert it via a simple "drag and drop",
 loading the html-file into a (onlne) HTML-Editor, f.ex. using my online HTML-Editor @ www.nlohrmann.de
