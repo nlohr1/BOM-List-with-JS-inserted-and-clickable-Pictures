@@ -60,11 +60,11 @@ In this "simpler" example normally no other insertion is necessary.
 
 The Principle:
 --------------
-The provided (BOM) html-file's adds a css-layout with blue border on white background for all image &lt;div&gt;-cells
+The provided (BOM) html-file adds a css-layout with blue border on white background for all image &lt;div&gt;-cells
 inside each listed item in a (table-)row, indicating that our "linked icons" inside this cells may be clicked,
 setting also a unique (small) hight of 20px for all images in the file.
 
 After loading the html-file into a browser, the js-script adds a unique ID to each image, which later
-is used to identify the clicked one, "stealing" (deleting) them it's given height.
+is used to identify the clicked one, "stealing" (=deleting) them it's given height.
 After a second click this given height (here 20px) is reinstalled.
 Hint: more detailed //commented-out descriptions at each end of js-line...
