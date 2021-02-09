@@ -1,26 +1,29 @@
 # BOM-List with clickable Pictures
-Electronic Schematics list with "Bill of Materials", with (manually) inserted pictures, made clickable.
+Electronic Schematics list with "Bill of Materials", with (manually) inserted pictures, made clickable
+per CSS and JS-Script.
 
 To create a BOM-List, each CAD-Program has its own Output-format, mostly (text-)CSS-format, although
-it's also possible to use item-lists in a HTML-File. Advantages: Readable in each Browser and using
-also images, inserted in a one-file only (not as usually spreaded over the internet)...
+programs also may output item-lists per HTML-File. Advantages of this format: Readable in each Browser
+and able to use images, inserted in one-file only (not as usually spreaded over the internet)...
 
 For this I used the ability (known from E-Mails in eml-file-format (MIME) to insert pictures in this
-Base64-format **inside** one html-file. This format uses 64 characters of the ASCII-table, so
-beeing typeable and "printable" (on printer and on screen), used also inserting images or symbols in
-any html-file.
+HTML Base64-format **inside** the given html-file. This format uses 64 characters of the ASCII-table,
+so beeing "typeable and printable" (also on screen), beeing able not only to insert a Image-Link but
+images or symbols directly into any html-file.
 
 To create a HTML-(BOM-)file for that purpose, I modified a Eagle .ulp-script to be able to generate
-a html-file with a table-cell at the begin of each row, here named
+a html-file *with a table-cell at the begin of each row*, here named
+
 "Eagle-BOM-List-Export to txt- css- or html-file.ulp"
-But also each other BOM-(item-)file from other programs may be used, beeing in html-format and
-surrounding the inserted picture-data with a simple <div>-box. 
 
-To transform a picture into a base64-format it's possible to insert it via "drag and drop",
+Other BOM-(item-)files generated from other programs may also be used, beeing in html-format and
+surrounding the inserted picture-data with a blank <div>-box. 
+
+To transform a picture into a base64-format it's possible to insert it via simply "drag and drop",
 loading the html-file into a HTML-Editor, f.ex. using my online HTML-Editor @ www.nlohrmann.de
-(see help-file there clicking "?" or pressing F1-key).
+(see help-file there clicking "?" or pressing keyboards F1-key).
 
-Using the provided html-file example it's possible to insert a picture into a <div>-box in each row,
+Using the provided html-file example it's possible to insert a picture into the <div>-box in each row,
 resulting in a small symbol (placed here at begin of each row).
 To hold the item-list in a overviewable format, each line has a proposed height of 20px, so also
 each picture has to be as small as 20px (height), therefore mostly not beeing possible to
