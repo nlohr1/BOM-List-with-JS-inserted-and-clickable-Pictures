@@ -66,11 +66,11 @@ makes *this* image blue-bordered and resizeable by simple mouse-click.
 The Principle:
 --------------
 The provided (BOM)-html-file adds a css-layout with blue border on white background for all image &lt;div&gt;-cells
-inside each listed item in a (table-)row, indicating that our "linked icons" inside this "imag"-cells may be clicked,
-and setts also a unique (small) hight of 20px for all images within the file.
+inside each listed item in a (table-)row, indicating that our "linked icons" inside this "image"-cells may be clicked,
+and sets also a unique (small) hight of 20px for all images within the file.
 
-After loading the html-file into a browser, the js-script then adds a unique ID to each image, which later
-is used to identify the clicked one, "stealing" (=deleting) them it's given height, here the 20px to show this
-image in its original (greater) size.  
+After loading the html-file into a browser, the js-script adds a unique ID to each image, which later
+is used to identify the clicked one, "stealing" (=deleting) them it's given height, here the 20px,
+to show it in original (greater) size.  
 After a second click the given height (20px) is reinstalled.  
-Hint: more detailed //commented descriptions at each end of line inside files.
+Hint: more detailed //commented descriptions at each end of line inside the files.
