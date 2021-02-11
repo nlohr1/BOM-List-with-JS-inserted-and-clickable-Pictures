@@ -1,0 +1,579 @@
+#require 5.0000
+
+#usage "en: <b>Export a Bill Of Material</b>\n"
+           "<p>"
+           "Generates a project's <i>Bill Of Material</i>."
+           "<p>"
+           "<author>Author: support@cadsoft.de</author><br>"
+           "<author>Modified by nl</author>",
+       "de: <b>Stückliste exportieren</b>\n"
+           "<p>"
+           "Erzeugt die <i>Stückliste</i> (Bill Of Material) eines Projekts."
+           "<p>"
+           "<author>Autor: support@cadsoft.de</author><br>"
+           "<author>Modifiziert von nl</author>"
+
+// THIS PROGRAM IS PROVIDED AS IS AND WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED
+
+string HelpTextEN =
+  "<b>Generating the Bill of Material</b>\n"
+  "<p>\n"
+  "<b>List type</b>\n"
+  "<p>\n"
+  "The <i>Bill Of Material</i> can be generated either as a list\n"
+  "of parts (where each part is listed on a separate line),\n"
+  "or as a list of values, where all parts with the same value are listed\n"
+  "in one line.\n"
+  "<p>\n"
+  "<b>Output formats</b>\n"
+  "<p>\n"
+  "You may choose between pure ASCII <b>Text</b>, columns delimited\n"
+  "by <b>Tabs</b>, <b>CSV</b>, or <b>HTML</b> formats.\n"
+  "<p>\n"
+  "<b>New attribute VALUE2</b>\n"
+  "<p>\n"
+  "To distinguish between parts which have the same value but differ in other\n"
+  "parameters like voltage rating (capacitors) or current rating (inductors) two\n"
+  "attributes may be added. The name of the attributes must be VALUE2 and VALUE3.<br>\n"
+  "When the BOM is generated VALUE, VALUE2, and VALUE3, are concatenated. The delimiter\n"
+  "is a slash (/); i.e. VALUE and VALUE2 appear as 100U/50V as an example.<br>\n"
+  "When VALUE2 or VALUE3 are empty or do not exist they are not shown. This ensures\n"
+  "backward compatibility with older library parts which do not contain the VALUE2 or VALUE3 attributes."
+  "<p>\n"
+  "If it is required that the BOM contains part numbers the attribute PARTNO may be added.\n"
+  "<p>\n"
+  "<i>Note: For the use of attributes Eagle Version 5.0 or higher is required.</i>\n"
+  ;
+
+string HelpTextDE =
+  "<b>Erzeugen der Stückliste</b>\n"
+  "<p>\n"
+  "<b>Listen-Typ</b>\n"
+  "<p>\n"
+  "Die <i>Stückliste</i> kann entweder als Liste der Bauteile generiert werden\n"
+  "(wobei jedes Bauteil in einer eigenen Zeile aufgeführt wird),\n"
+  "oder als Liste der Werte, wobei alle Bauteile mit dem gleichen Wert in einer Zeile\n"
+  "zusammengefasst werden.\n"
+  "<p>\n"
+  "<b>Ausgabeformate</b>\n"
+  "<p>\n"
+  "Sie können zwischen reinem ASCII-<b>Text</b>, \n"
+  "Textspalten durch <b>Tabulatoren</b> getrennt,\n"
+  "<b>CSV</b>, oder <b>HTML</b>-Format wählen.\n"
+  "<p>\n"
+  "<b>Neues Attribut VALUE2</b>\n"
+  "<p>\n"
+  "Um zwischen Bauteilen unterscheiden zu können, die zwar den gleichen Wert besitzen,\n"
+  "aber sich in anderen Parametern wie Spannung (Kondensatoren) oder Strom (Induktivitäten)\n"
+  "unterscheiden, können zwei weitere Attribute hinzugefügt werden.\n"
+  "Die Namen dieser Attribute müssen VALUE2 bzw. VALUE3 sein.<br>\n"
+  "Wenn die Stückliste generiert wird, werden VALUE, VALUE2 und VALUE3 aneinandergehängt.\n"
+  "Das Trennzeichen ist der Schrägstrich (/); d.h. VALUE und VALUE2 erscheinen als\n"
+  "z.B. 100U/50V. <br>Wenn VALUE2 oder VALUE3 leer ist oder nicht existiert wird es nicht angezeigt.\n"
+  "Somit ist die Rückwärtskompatibilität zu älteren Bibliotheksbauteilen gewährleistet,\n"
+  "die nicht das VALUE2 oder VALUE3 Attribut besitzen."
+  "<p>\n"
+  "Wenn für die Ausgabe der Stückliste Bauteilenummern benötigt werden, kann optional\n"
+  "das Attribut PARTNO dem Device hinzugefügt werden.\n"
+  "<p>\n"
+  "<i>Hinweis: Für die Attributeverwaltung ist Eagle Version 5.0 oder höher erforderlich</i>\n"
+  ;
+
+string I18N[] =
+{
+  "en\v"
+  "de\v"
+  ,
+  "<hr><b>ERROR: No schematic!</b><p>\nThis program can only work in the schematic editor.\v"
+  "<hr><b>FEHLER: Kein Schaltplan!</b><p>\nDieses Programm kann nur in einem Schaltplan verwendet werden.\v"
+  ,
+  "Part\tValue\tDescription\tPackage\v"
+  "Component\tValue\tDescription\tPackage\v"
+  ,
+  "Qty\tParts\tValue\tDescription\tPackage\v"
+  "Qty.\tComponents\tValue\tDescription\tPackage\v"
+  ,
+  "Part Number\v"
+  "Part Number\v"
+  ,
+  "Partlist exported from %s &ndash; %s\v"
+  "Partlist exported from %s &ndash;&nbsp; %s\v"
+  ,
+  "Bill of Materials - Preview\v"
+  "Stückliste - Vorschau\v"
+  ,
+  "-Close\v"
+  "-Schließen\v"
+  ,
+  "Save Bill of Materials\v"
+  "Stückliste speichern\v"
+  ,
+  "File '\v"
+  "Datei '\v"
+  ,
+  "' exists\n\nOverwrite?\v"
+  "' existiert\n\nÜberschreiben?\v"
+  ,
+  "+&Yes\v"
+  "+&Ja\v"
+  ,
+  "-&No\v"
+  "-&Nein\v"
+  ,
+  "&No\v"
+  "&Nein\v"
+  ,
+  "+OK\v"
+  "+OK\v"
+  ,
+  "Name can't be empty!\v"
+  "Name kann nicht leer sein!\v"
+  ,
+  "-Cancel\v"
+  "-Abbrechen\v"
+  ,
+  "Bill of Materials - Help\v"
+  "Stückliste - Hilfe\v"
+  ,
+  "Bill of Materials - by nl\v"
+  "Stückliste - von nl\v"
+  ,
+  "List type\v"
+  "Art der Liste\v"
+  ,
+  "Place each &part entry on a separate line\v"
+  "&Jedes Bauteil in einer eigenen Zeile\v"
+  ,
+  "Place parts with identical &values on the same line\v"
+  "Bauteile mit identischen &Werten in einer Zeile\v"
+  ,
+  "&Add part numbers to list\v"
+  "Liste mit Bauteile&nummern\v"
+  ,
+  "Output format\v"
+  "Ausgabeformat\v"
+  ,
+  "Text, &fixed width\v"
+  "Text, &feste Breite\v"
+  ,
+  "Text, ta&b separated\v"
+  "Text, durch Ta&bulatoren getrennt\v"
+  ,
+  "&CSV, values double-quoted\v"
+  "&CSV, Werte zwischen doppelten Hochkommata\v"
+  ,
+  "&HTML\v"
+  "&HTML\v"
+  ,
+  "Total number of parts: \v"
+  "Anzahl der Bauteile: \v"
+  ,
+  "Number of different parts: \v"
+  "Anzahl der verschiedenen Bauteile: \v"
+  ,
+  "Statistics\v"
+  "Statistik\v"
+  ,
+  "Previe&w\v"
+  "&Vorschau\v"
+  ,
+  "&Save...\v"
+  "&Speichern...\v"
+  ,
+  "H&elp\v"
+  "H&ilfe\v"
+};
+
+int Language = strstr(I18N[0], language()) / 3;
+
+string tr(string s)
+{
+  string t = lookup(I18N, s, Language, '\v');
+  return t ? t : s;
+}
+
+if (!schematic)
+  {
+    dlgMessageBox(usage + tr("<hr><b>ERROR: No schematic!</b><p>\nThis program can only work in the schematic editor."));
+    exit(1);
+  }
+
+string Version = "v0.1";
+int NumParts;
+numeric string Lines[];
+numeric string PartName[], PartValue1[], PartValue2[], PartValue3[], PartDevice[];
+numeric string PartPackage[], PartNumber[], PartHeadline[], PartDescription[];
+int PartValueOn[];
+
+int Selected;
+int SortListByColumn = 1;
+int ListType = 1;
+int OutputFormat = 3;
+int ExportPartNumber = 0;
+
+string PartsCount;
+string ValuesCount;
+
+enum { ltParts, ltValues };                 // List Types
+enum { ofText, ofTextTab, ofCSV, ofHTML };  // Output Formats
+
+
+void CollectPartData(void)
+{
+  NumParts = 0;
+
+  schematic(SCH) {
+    SCH.parts(P) {
+      if (P.device.package) {
+         PartName[NumParts] = P.name;
+         PartValue1[NumParts] = P.value;
+         PartDevice[NumParts] = P.device.name;
+         PartPackage[NumParts] = P.device.package.name;
+         PartHeadline[NumParts] = P.device.headline;
+         PartDescription[NumParts] = P.device.description;
+         PartValueOn[NumParts] = P.device.value == "On";
+         P.attributes(A)
+           {if (A.name == "VALUE2")
+               PartValue2[NumParts] = A.value;
+            if (A.name == "VALUE3")
+               PartValue3[NumParts] = A.value;
+            if (A.name == "PARTNO")
+               PartNumber[NumParts] = A.value;
+           }
+         NumParts++;
+         }
+      }
+    }
+}
+
+
+void GeneratePartList(void)
+{
+  int NumLine = 0;
+  string PartValue[];
+
+  Lines[NumLine] = tr("Part\tValue\tDescription\tPackage");
+  if (ExportPartNumber)
+     Lines[NumLine] += "\t" + tr("Part Number");
+  NumLine++;
+
+  for (int i = 0; i < NumParts; i++)
+  {
+    PartValue[i] = PartValue1[i];
+    if (PartValue2[i])
+      PartValue[i] += "/" + PartValue2[i];
+    if (PartValue3[i])
+      PartValue[i] += "/" + PartValue3[i];
+    Lines[NumLine] = PartName[i] + "\t" + PartValue[i] + "\t" + PartHeadline[i] + "\t" + PartPackage[i];
+    if (ExportPartNumber)
+      Lines[NumLine] += "\t" + PartNumber[i];
+    NumLine++;
+  }
+  Lines[NumLine] = "";           //To terminate list view an empty line is required
+  sprintf(PartsCount, tr("Total number of parts: ") + "%d", NumParts);
+  SortListByColumn = 1;          //List view sorted by parts (first column)
+}
+
+
+void GenerateValueList(void)
+{
+  int NumLine = 0;
+  int Index[];
+  string PartValue[];
+  numeric string PartNames[];
+  string PartExt[];
+  string Quantity[];
+
+  Lines[NumLine] = tr("Qty\tParts\tValue\tDescription\tPackage");
+  if (ExportPartNumber)
+    Lines[NumLine] += "\t" + tr("Part Number");
+  NumLine++;
+
+  for (int i = 0; i < NumParts; i++)
+  {
+   PartValue[i] = PartValue1[i];
+   if (PartValue2[i])
+     PartValue[i] += "/" + PartValue2[i];
+   if (PartValue3[i])
+     PartValue[i] += "/" + PartValue3[i];
+  }
+  sort(NumParts, Index, PartValue, PartDevice, PartName);
+
+  for (int n1 = 0, n2 = 0; ++n2 <= NumParts;)
+  {
+    int i1 = Index[n1];
+    if (n2 < NumParts)
+    {
+      int i2 = Index[n2];
+      //XXX value on/off?
+      if (PartValue[i1] == PartValue[i2] && PartDevice[i1] == PartDevice[i2] && PartNumber[i1] == PartNumber[i2])
+        continue;
+    }
+    sprintf(Quantity[NumLine], "%d", n2 - n1);
+
+    for (;;)
+    {
+      PartNames[NumLine] += PartName[i1];
+      if (++n1 < n2)
+      {
+        i1 = Index[n1];
+        PartNames[NumLine] += ", ";
+      }
+      else
+        break;
+    }
+    PartExt[NumLine] = PartValue[i1] + "\t" + PartHeadline[i1]+ "\t" + PartPackage[i1];
+    if (ExportPartNumber)
+      PartExt[NumLine] += "\t" + PartNumber[i1];
+
+    NumLine++;
+  }
+
+  sort(NumLine, Index, PartNames, Quantity, PartExt);
+
+  for (int l = 1; l < NumLine; l++)
+  {
+    Lines[l] = Quantity[Index[l]] + "\t" + PartNames[Index[l]] + "\t" + PartExt[Index[l]];
+  }
+  Lines[NumLine] = "";           //To terminate list view an empty line is required
+  sprintf(ValuesCount, tr("Number of different parts: ") + "%d", NumLine - 1);
+  SortListByColumn = 2;          //List view sorted by parts (second column)
+}
+
+void GenerateList(void)
+{
+  switch (ListType)
+  {
+    case ltParts:  GeneratePartList(); break;
+    case ltValues: GenerateValueList(); break;
+  }
+}
+
+string MakeListHeader(void)
+{
+  string s;
+  schematic(SCH) sprintf(s, tr("Partlist exported from %s on %s"), SCH.name, t2string(time()));
+  return s;
+}
+
+string MakeListText(void)
+{
+  int l, Width[];
+  for (l = 0; Lines[l]; l++)
+  {
+    string a[];
+    for (int n = strsplit(a, Lines[l], '\t'); n--; )
+      Width[n] = max(Width[n], strlen(a[n]));
+  }
+  string List;
+  List = MakeListHeader() + "\n\n";
+  int numHeaders;
+  for (l = 0; Lines[l]; l++)
+  {
+    string line, a[];
+    int n = strsplit(a, Lines[l], '\t');
+    for (int i = 0; i < n; i++)
+    {
+      string s;
+      sprintf(s, "%s%-*s", line ? " " : "", Width[i], a[i]);
+      line += s;
+    }
+    List += line + "\n";
+  }
+  return List;
+}
+
+string MakeListTab(void)
+{
+  string List;
+  int numHeaders;
+
+  List = MakeListHeader() + "\n\n";
+
+  for (int l = 0; Lines[l]; l++)
+  {
+    string a[];
+    int n = strsplit(a, Lines[l], '\t');
+    for (int i = 0; i < n - 1; i++)
+      List += a[i]+ "\t";
+    List += a[n - 1] + "\n";
+  }
+  return List;
+}
+
+string MakeListCSV(void)
+{
+  string List;
+  int numHeaders;
+
+  List = MakeListHeader() + "\n\n";
+
+  for (int l = 0; Lines[l]; l++)
+  {
+    string a[];
+    int n = strsplit(a, Lines[l], '\t');
+    for (int i = 0; i < n - 1; i++)
+      List += "\"" + a[i]+ "\";";
+    List += "\"" + a[n - 1] + "\"\n";
+  }
+  return List;
+}
+
+string MakeListHTML(void)
+{
+  string List;
+  List = "<html lang='de'><head><meta charset='utf-8'/>\n";
+  List += "<style type="text/css">\n";
+  List += "body, td {font-family: Verdana,Arial,Helvetica; font-size:12px; text-align:left;}\ntable, th, td {border-collapse:collapse; border:solid 1px #999; padding:2px 3px; vertical-align:top; white-space:nowrap;}\n";
+  List += "th {font-size:13px; background-color:#C0D0D9;}\nh1 {font-family:Arial; font-size:12pt; margin:5px 0 15px 0; color:#008;}\n";
+  List += "tr:nth-child(odd) td {background:#e0efff;}\ntd > div {border:1px solid #bdf; background:white;}\ntd:first-child {padding:0}\ntd:first-child, td:nth-child(2) {text-align:center;vertical-align:middle}\nimg {height:20px}\n";
+  List += "</style>\n<script> window.onload=function() {\n";
+  List += "var myimg = document.getElementsByTagName('img'); for (i=0; i<myimg.length; i++) {\n";
+  List += "myimg[i].id=[i]; var wrapper=document.createElement('div'); wrapper.appendChild(myimg[i].cloneNode(true)); myimg[i].parentNode.replaceChild(wrapper, myimg[i]); myimg[i].onclick=function(){ImgRez(this.id);}}}\n";
+  List += "res=1; function ImgRez(bld){var myimg=document.images[bld]; if(res==1){myimg.style.height='auto';res=0;} else if(res==0){myimg=document.getElementById(bld);myimg.style.height='20px';res=1;}}\n";
+  List += "</script>\n</head><body><center>\n";
+  List += "<h1>" + MakeListHeader() + "</h1>\n";
+  List += "<table>\n";
+  int numHeaders;
+  for (int l = 0; Lines[l]; l++)
+  {
+    if (l==0)
+    List += "<tr><th>Img.</th>";
+	if (l>0)
+    List += "<tr><td></td>";
+    string a[];
+    int n = strsplit(a, Lines[l], '\t');
+    for (int i = 0; i < n; i++)
+    {
+      if (l == 0)
+      List += "<th>" + a[i] + "</th>";
+      if (l > 0)
+      List += "<td>" + a[i] + "</td>";
+    }
+    List += "</tr>";
+  }
+  List += "</table>\n</center></body></html>\n";
+  return List;
+}
+
+string MakeList(void)
+{
+  switch (OutputFormat)
+  {
+    case ofText:    return MakeListText(); break;
+    case ofTextTab: return MakeListTab();  break;
+    case ofCSV :    return MakeListCSV();  break;
+    case ofHTML:    return MakeListHTML(); break;
+  }
+  return "";
+}
+
+void ViewList(void)
+{
+  dlgDialog(tr("Bill of Materials - Preview"))
+  {
+    string s = MakeList();
+    if (OutputFormat == ofText)
+      s = "<pre>" + s + "</pre>";
+    dlgHBoxLayout dlgSpacing(1100);
+    dlgHBoxLayout
+    {
+      dlgVBoxLayout dlgSpacing(800);
+      dlgTextView(s);
+    }
+    dlgHBoxLayout
+    {
+      dlgStretch(1);
+      dlgPushButton(tr("-Close")) dlgReject();
+    }
+  };
+}
+
+void SaveList(void)
+{
+  string FileName;
+  string FileExt;
+
+  switch (OutputFormat)
+  {
+    case ofText:    FileExt = ".txt"; break;
+    case ofTextTab: FileExt = ".bom"; break;
+    case ofCSV:     FileExt = ".csv"; break;
+    case ofHTML:    FileExt = ".htm"; break;
+  }
+  schematic(SCH) FileName = filesetext (SCH.name, FileExt);
+  FileName = dlgFileSave(tr("Save Bill of Materials"), FileName);
+  if (FileName)
+  {
+    string a[];
+    if (!fileglob(a, FileName) || dlgMessageBox(tr("File '") + FileName + tr("' exists\n\nOverwrite?"), tr("+&Yes"), tr("-&No")) == 0)
+    {
+      output(FileName, "wt")
+      {
+        printf("%s", MakeList());    // using "%s" to avoid problems if list contains any '%'
+      }
+    }
+  }
+}
+
+void DisplayHelp(void)
+{
+  dlgDialog(tr("Bill of Materials - Help"))
+  {
+    dlgHBoxLayout dlgSpacing(600);
+    dlgHBoxLayout
+    {
+      dlgVBoxLayout dlgSpacing(600);
+      dlgTextView(language() == "de" ? HelpTextDE : HelpTextEN);
+    }
+    dlgHBoxLayout
+    {
+      dlgStretch(1);
+      dlgPushButton(tr("-Close")) dlgReject();
+    }
+  };
+}
+
+CollectPartData();
+GenerateList();
+
+dlgDialog(tr("Bill of Materials - by nl") + "  " + Version)
+{
+  dlgHBoxLayout dlgSpacing(900);
+  dlgHBoxLayout
+  {
+    dlgVBoxLayout dlgSpacing(600);
+    dlgListView("", Lines, Selected, SortListByColumn);
+  }
+  dlgHBoxLayout
+  {
+    dlgGroup(tr("Statistics"))
+    {
+      dlgLabel(PartsCount, 1);
+      dlgLabel(ValuesCount, 1);
+      dlgLabel("", 1);
+      dlgLabel("", 1);
+    }
+    dlgGroup(tr("List type"))
+    {
+      dlgRadioButton(tr("Place each &part entry on a separate line"), ListType) GenerateList();
+      dlgRadioButton(tr("Place parts with identical &values on the same line"), ListType) GenerateList();
+      dlgCheckBox(tr("&Add part numbers to list"), ExportPartNumber) GenerateList();
+    }
+    dlgGroup(tr("Output format"))
+    {
+      dlgRadioButton(tr("Text, &fixed width"), OutputFormat);
+      dlgRadioButton(tr("Text, ta&b separated"), OutputFormat);
+      dlgRadioButton(tr("&CSV, values double-quoted"), OutputFormat);
+      dlgRadioButton(tr("&HTML"), OutputFormat);
+    }
+  }
+  dlgHBoxLayout
+  {
+    dlgStretch(1);
+    dlgPushButton(tr("Previe&w")) ViewList();
+    dlgPushButton(tr("&Save...")) SaveList();
+    dlgPushButton(tr("H&elp")) DisplayHelp();
+    dlgPushButton(tr("-Close")) dlgAccept();
+  }
+};
