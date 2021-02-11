@@ -72,6 +72,6 @@ and setts also a unique (small) hight of 20px for all images within the file.
 
 After loading the html-file into a browser, the js-script then adds a unique ID to each image, which later
 is used to identify the clicked one, "stealing" (=deleting) them it's given height, here the 20px to show this
-image in its original size.  
+image in its original (greater) size.  
 After a second click the given height (20px) is reinstalled.  
 Hint: more detailed //commented descriptions at each end of line inside files.
