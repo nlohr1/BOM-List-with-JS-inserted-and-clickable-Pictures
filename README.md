@@ -31,8 +31,8 @@ Using the html-file example (file: "BOM-List with clickable Pictures.htm") it's 
 (manually) into the &lt;div&gt;-box of each row, resulting in a small visible symbol, placed at begin of each row.
 
 To hold the desired item-list in a overviewable format, each line has a proposed height of 20px, so also
-each picture has to be as small as 20px (height), therefore mostly not beeing possible to recognize
-this small item-"Icons" in detail, at first view...
+each picture has to be as small as 20px (height), therefore most of this small-sized "Icons" at first view are
+not recognizeable in detail...
 Thus the ability to enlarge them via a mouse-click and reduce them again with a second click.
 
 Addition: image-data saved once in the header, for repeated use within the file-body:
@@ -41,13 +41,12 @@ If there are repeated items to be listed, as Resistors or Capacitors (in electro
 their picture in form of base64-data may be inserted *only once* as a variable in the html-file's js-header,
 but used *repeated times* in the html-body, so saving a lot of total (BOM-)file space.
 
-Yet not implemented in this last feature is a total automated process to insert pictures: The two provided
-"symbols" (for repeated use of R's and C's) are inserted in the js-header and serves as usable examples, but 
-if additional repeated-items are needed to use, they have to be inserted manually (f.ex. via a text-editor),
+Yet not implemented in this last feature is a total automated process to insert repeated pictures: The two
+provided "symbols" (for repeated use of R's and C's) inserted in the js-header serves as usable examples,
+but additional repeated-items have to be inserted manually (f.ex. via a text-editor),
 replacing all " in the *&lt;image-data&gt;* with \\" – as f.ex. *alt=""* image-tags have to be coded here
 as *alt=\\"\\"* (for js to read this special " character as part-of-image-code and not as part-of-a-command).
 
-Also each image in the *html-body* has to be surrounded with a simple &lt;div&gt;...&lt;/div&gt;-box.
 Hint: For more detailed description see //commented lines inside the html- and js-file examples.
 
 Script for simple "Click to enlarge" (each image in a given html-file):
@@ -61,7 +60,7 @@ or via css-width... With this "simpler" example normally no other (css-)insertio
 The File "Resize-only-One-Image.js"
 -----------------------------------
 ...does what the name says: Inserting this js-script within one blank-space between the image-file tags  
-&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; (number "50" here sets the pics width, in "px")  
+&lt;img src=\"...\" alt=\"\" width=\"50\"&gt; (number "50" here sets the image's width, in "px")  
 makes *this* image blue-bordered and resizeable by simple mouse-click.
 
 The Principle:
