@@ -24,7 +24,7 @@ window.onload=function() {
 // Two functions for unique images: "click-to-original-size" and "back to the given-size":
 // 1. insert (manually) each unique pic-data (see Online-Editor @ www.nlohrmann.de),
    // the script later enumerates automatically all pictures giving them a unique ID,
- var myimg=document.getElementsByTagName('img'); for (i=0; i<myimg.length; i++) {myimg[i].id=[i]; //gives each document-image a unique ID
+ var myimg=document.getElementsByTagName('img'); for (i=0; i<myimg.length; i++) {myimg[i].id=[i]; //gives each image a unique ID
 // 2. the script inserts a blank <div>[image]</div> around all images in the document, used to draw a blue border inside the 1st <td>-cell,
  var wrapper=document.createElement('div'); wrapper.appendChild(myimg[i].cloneNode(true)); myimg[i].parentNode.replaceChild(wrapper, myimg[i]);
 // 3. if then a picture is clicked, it "steals" them it's given size (function "ImgRez"):
