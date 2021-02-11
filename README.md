@@ -12,7 +12,7 @@ beeing "typeable and printable" (also on a screen), so beeing able to insert the
 as a valid *coding for binary-files*, as images originally are.
 
 To create a HTML-(BOM-)file for that purpose, I modified an Eagle .ulp-script to generate a html-bom-file
-inserting *a table-cell at begin of each row*, here named "Eagle-BOM-List-Export to txt- css- or html-file.ulp"  
+inserting *a table-cell at begin of each row*, here named "Eagle-BOM-List-Export-w-JScript-htm.ulp" 
 
 BOM-(item-)files generated from other programs may also be used, beeing in html-format and
 surrounding the inserted picture-data with a blank &lt;div&gt; box with a chosen CSS-class, to insert repeated images
